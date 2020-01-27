@@ -4,8 +4,33 @@
 
 #include "State.h"
 
+State::~State() = default;
+
+State::State(string name) { name = name; }
+
+State0::State0() : State("STATE0") {}
+
+State1::State1() : State("STATE1") {}
+
+State2::State2() : State("STATE2") {}
+
+State3::State3() : State("STATE3") {}
+
+State4::State4() : State("STATE4") {}
+
+State5::State5() : State("STATE5") {}
+
+State6::State6() : State("STATE6") {}
+
+State7::State7() : State("STATE7") {}
+
+State8::State8() : State("STATE8") {}
+
+State9::State9() : State("STATE9") {}
+
+
 bool State0::transition(Automate &automate, Symbol *symbol) {
-    switch (*symbol){
+    switch (*symbol) {
         case INT:
             automate.shift(symbol, new State3());
             break;
@@ -204,3 +229,4 @@ bool State9::transition(Automate &automate, Symbol *symbol){
     
     return true;
 }
+

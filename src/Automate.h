@@ -8,6 +8,7 @@
 #include "lexer.h"
 #include "Symbol.h"
 #include <stack>
+#include <iostream>
 
 class State;
 
@@ -15,7 +16,7 @@ using namespace std;
 
 class Automate {
 public:
-    Automate(string input);
+    Automate(string &input);
     void shift(Symbol *symbol, State *state);
     void reduction(int n, Symbol *symbol);
     void run();
