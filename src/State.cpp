@@ -41,74 +41,74 @@ bool State0::transition(Automate &automate, Symbol *symbol) {
             automate.shift(symbol, new State1());
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
 
     return true;
 }
 
-bool State1::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State1::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case PLUS:
-            automate.shift(symbol,new State4());
+            automate.shift(symbol, new State4());
             break;
         case MULT:
-            automate.shift(symbol,new State5());
+            automate.shift(symbol, new State5());
             break;
         case FIN:
-            return FALSE;
+            return false;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
     return true;
 }
 
-bool State2::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State2::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case INT:
-            automate.shift(symbol,new State3());
+            automate.shift(symbol, new State3());
             break;
         case OPENPAR:
-            automate.shift(symbol,new State2());
+            automate.shift(symbol, new State2());
             break;
-        case EXP:
-            automate.shift(symbol,new State6());
+        case EXPR:
+            automate.shift(symbol, new State6());
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
     return true;
 }
 
-bool State3::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State3::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case PLUS:
-            automate.reduction(1, symbol);
+            automate.reduction(1, new Symbol(PLUS));
             break;
         case MULT:
-            automate.reduction(1, symbol);
+            automate.reduction(1, new Symbol(MULT));
             break;
         case CLOSEPAR:
-            automate.reduction(1, symbol);
+            automate.reduction(1, new Symbol(CLOSEPAR));
             break;
         case FIN:
-            automate.reduction(1, symbol);
+            automate.reduction(1, new Symbol(FIN));
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
     return true;
 }
 
 bool State4::transition(Automate &automate, Symbol *symbol) {
-    switch (*symbol){
+    switch (*symbol) {
         case INT:
             automate.shift(symbol, new State3());
             break;
@@ -119,7 +119,7 @@ bool State4::transition(Automate &automate, Symbol *symbol) {
             automate.shift(symbol, new State7());
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
 
@@ -127,7 +127,7 @@ bool State4::transition(Automate &automate, Symbol *symbol) {
 }
 
 bool State5::transition(Automate &automate, Symbol *symbol) {
-    switch (*symbol){
+    switch (*symbol) {
         case INT:
             automate.shift(symbol, new State3());
             break;
@@ -138,95 +138,95 @@ bool State5::transition(Automate &automate, Symbol *symbol) {
             automate.shift(symbol, new State8());
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
 
     return true;
 }
 
-bool State6::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State6::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case PLUS:
-            automate.shift(symbol,new State4());
-            break;
-        case MULT:
-            automate.shift(symbol,new State5());
-            break;
-        case CLOSEPAR:
-            automate.shift(symbol, new State9());
-            break;
-        default:
-            automate.shift(new Symbol(ERROR), NULL);
-            return false;
-    }
-    
-    return true;
-}
-
-bool State7::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
-        case PLUS:
-            automate.reduction(3, symbol);
+            automate.shift(symbol, new State4());
             break;
         case MULT:
             automate.shift(symbol, new State5());
             break;
         case CLOSEPAR:
-            automate.reduction(3, symbol);
-            break;
-        case FIN:
-            automate.reduction(3, symbol);
+            automate.shift(symbol, new State9());
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
     return true;
 }
 
-bool State8::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State7::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case PLUS:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(PLUS));
             break;
         case MULT:
-            automate.reduction(3, symbol);
+            automate.shift(symbol, new State5());
             break;
         case CLOSEPAR:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(CLOSEPAR));
             break;
         case FIN:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(FIN));
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
     return true;
 }
 
-bool State9::transition(Automate &automate, Symbol *symbol){
-    switch (*symbol){
+bool State8::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
         case PLUS:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(PLUS));
             break;
         case MULT:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(MULT));
             break;
         case CLOSEPAR:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(CLOSEPAR));
             break;
         case FIN:
-            automate.reduction(3, symbol);
+            automate.reduction(3, new Symbol(FIN));
             break;
         default:
-            automate.shift(new Symbol(ERROR), NULL);
+            automate.shift(new Symbol(ERREUR), nullptr);
             return false;
     }
-    
+
+    return true;
+}
+
+bool State9::transition(Automate &automate, Symbol *symbol) {
+    switch (*symbol) {
+        case PLUS:
+            automate.reduction(3, new Symbol(PLUS));
+            break;
+        case MULT:
+            automate.reduction(3, new Symbol(MULT));
+            break;
+        case CLOSEPAR:
+            automate.reduction(3, new Symbol(CLOSEPAR));
+            break;
+        case FIN:
+            automate.reduction(3, new Symbol(FIN));
+            break;
+        default:
+            automate.shift(new Symbol(ERREUR), nullptr);
+            return false;
+    }
+
     return true;
 }
 
