@@ -101,19 +101,19 @@ bool State3::transition(Automate &automate, Symbol *symbol) {
     switch (*symbol) {
         case PLUS:
             cout << "State 3 -> +" << endl;
-            automate.reduction(1, new Symbol(PLUS));
+            automate.reduction(1, new Plus);
             break;
         case MULT:
             cout << "State 3 -> *" << endl;
-            automate.reduction(1, new Symbol(MULT));
+            automate.reduction(1, new Mult);
             break;
         case CLOSEPAR:
             cout << "State 3 -> )" << endl;
-            automate.reduction(1, new Symbol(CLOSEPAR));
+            automate.reduction(1, new Closepar);
             break;
         case FIN:
             cout << "State 3 -> $" << endl;
-            automate.reduction(1, new Symbol(FIN));
+            automate.reduction(1, new Fin);
             break;
         default:
             cout << "State 3 -> ERROR" << endl;
@@ -197,7 +197,7 @@ bool State7::transition(Automate &automate, Symbol *symbol) {
     switch (*symbol) {
         case PLUS:
             cout << "State 7 -> +" << endl;
-            automate.reduction(3, new Symbol(PLUS));
+            automate.reduction(3, new Plus);
             break;
         case MULT:
             cout << "State 7 -> *" << endl;
@@ -205,11 +205,11 @@ bool State7::transition(Automate &automate, Symbol *symbol) {
             break;
         case CLOSEPAR:
             cout << "State 7 -> )" << endl;
-            automate.reduction(3, new Symbol(CLOSEPAR));
+            automate.reduction(3, new Closepar);
             break;
         case FIN:
             cout << "State 7 -> $" << endl;
-            automate.reduction(3, new Symbol(FIN));
+            automate.reduction(3, new Fin);
             break;
         default:
             cout << "State 7 -> ERROR" << endl;
@@ -224,19 +224,19 @@ bool State8::transition(Automate &automate, Symbol *symbol) {
     switch (*symbol) {
         case PLUS:
             cout << "State 8 -> +" << endl;
-            automate.reduction(3, new Symbol(PLUS));
+            automate.reduction(3, new Plus);
             break;
         case MULT:
             cout << "State 8 -> *" << endl;
-            automate.reduction(3, new Symbol(MULT));
+            automate.reduction(3, new Mult);
             break;
         case CLOSEPAR:
             cout << "State 8 -> )" << endl;
-            automate.reduction(3, new Symbol(CLOSEPAR));
+            automate.reduction(3, new Closepar);
             break;
         case FIN:
             cout << "State 8 -> $" << endl;
-            automate.reduction(3, new Symbol(FIN));
+            automate.reduction(3, new Fin);
             break;
         default:
             cout << "State 8 -> ERROR" << endl;
@@ -251,19 +251,19 @@ bool State9::transition(Automate &automate, Symbol *symbol) {
     switch (*symbol) {
         case PLUS:
             cout << "State 9 -> +" << endl;
-            automate.reduction(3, new Symbol(PLUS));
+            automate.reduction(3, new Plus);
             break;
         case MULT:
             cout << "State 9 -> *" << endl;
-            automate.reduction(3, new Symbol(MULT));
+            automate.reduction(3, new Mult);
             break;
         case CLOSEPAR:
             cout << "State 9 -> )" << endl;
-            automate.reduction(3, new Symbol(CLOSEPAR));
+            automate.reduction(3, new Closepar);
             break;
         case FIN:
             cout << "State 9 -> $" << endl;
-            automate.reduction(3, new Symbol(FIN));
+            automate.reduction(3, new Fin);
             break;
         default:
             cout << "State 9 -> ERROR" << endl;
