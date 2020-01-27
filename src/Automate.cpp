@@ -40,8 +40,12 @@ void Automate::reduction(int n, Symbol *symbol) {
                 aEnlever.pop();
                 val = val * aEnlever.top()->getValeur();
             } else {
+                //aEnlever.pop();
+                Entier tmp =  (Entier) *aEnlever.top();
+                val = tmp.eval();
+                cout << val << endl;
                 aEnlever.pop();
-                val = val + aEnlever.top()->getValeur();
+                //val = val + aEnlever.top()->getValeur();
             }
         }
     }
@@ -58,7 +62,6 @@ void Automate::run() {
         Symbol *symbol = this->lexer->Consulter();
         this->lexer->Avancer();
         auto stateStackTop = this->stateStack.top();
-        cout << symbol->getValeur() << endl;
         nextState = stateStackTop->transition(*this, symbol);
     }
 

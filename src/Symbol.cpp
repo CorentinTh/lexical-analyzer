@@ -25,6 +25,7 @@ void Expression::Affiche() {
 }
 
 int Expression::getValeur() const {
+    cout << "getvaleur expression " << endl;
     return valeur;
 }
 
@@ -43,5 +44,5 @@ void Erreur::Affiche() { Symbol::Affiche(); }
 
 int Symbol::getValeur() { return -1; }
 
-int Entier::getValeur() { return valeur; }
+int Entier::getValeur() { cout << "Test: " << endl; return valeur; }
 

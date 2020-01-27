@@ -1,4 +1,6 @@
 #include "lexer.h"
+#include <iostream>
+#include <typeinfo>
 
 Symbol *Lexer::Consulter() {
     if (!tampon) {
@@ -31,9 +33,11 @@ Symbol *Lexer::Consulter() {
                         while (flux[tete + i] <= '9' && flux[tete + i] >= '0') {
                             resultat = resultat * 10 + (flux[tete + i] - '0');
                             i++;
+
                         }
                         tete = tete + i;
                         tampon = new Entier(resultat);
+//TO DO : PROBLEM affecté comme symbole et pas entier.
                     } else {
                         tampon = new Symbol(ERREUR);
                     }
