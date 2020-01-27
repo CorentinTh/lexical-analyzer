@@ -1,74 +1,76 @@
-//
-// Created by corentin on 27/01/2020.
-//
+/*
+ *             Lexical analyzer
+ *      Tania Oudinet & Corentin Thomasset
+ *          Language et grammaire
+ *         INSA Lyon - Janvier 2020
+ *
+ */
 
-#include "Automate.h"
 #include "State.h"
+#include <iostream>
 
 Automate::Automate(string &input) {
+    this->input = input;
     this->lexer = new Lexer(input);
-    this->stateStack.push(new State0());
+    this->statesStack.push(new State0());
+}
+
+void Automate::run() {
+    bool nextState;
+
+    do {
+        Symbol *symbol = this->lexer->consult();
+        this->lexer->step();
+        nextState = this->statesStack.top()->transition(*this, symbol);
+    } while (nextState);
+
+    Symbol *topSymbol = this->symbolsStack.top();
+
+    if (*topSymbol != ERREUR) {
+        cout << "The syntax is correct." << endl;
+        cout << this->input << " = " << topSymbol->getValue() << endl;
+    } else {
+        cout << "Invalid characters" << endl;
+    }
 }
 
 void Automate::shift(Symbol *symbol, State *state) {
-    this->symbolStack.push(symbol);
-    this->stateStack.push(state);
+    this->symbolsStack.push(symbol);
+    this->statesStack.push(state);
 }
 
-void Automate::reduction(int n, Symbol *symbol) {
-    stack<Symbol *> aEnlever;
+void Automate::reduce(int n, Symbol *symbol) {
+    stack<Symbol *> toRemove;
 
     for (int i = 0; i < n; ++i) {
-        delete (stateStack.top());
-        stateStack.pop();
-        aEnlever.push(symbolStack.top());
-        symbolStack.pop();
+        delete (statesStack.top());
+        statesStack.pop();
+        toRemove.push(symbolsStack.top());
+        symbolsStack.pop();
     }
 
-    int val;
+    int val = -1;
 
     if (n == 1) {
-        val = aEnlever.top()->getValeur();
+        val = toRemove.top()->getValue();
     } else if (n == 3) {
-        if (*aEnlever.top() == OPENPAR) {
-            aEnlever.pop();
-            val = aEnlever.top()->getValeur();
+        if (*toRemove.top() == OPENPAR) {
+            toRemove.pop();
+            val = toRemove.top()->getValue();
         } else {
-            val = aEnlever.top()->getValeur();
-            aEnlever.pop();
-            if (*aEnlever.top() == MULT) {
-                aEnlever.pop();
-                val = val * aEnlever.top()->getValeur();
+            val = toRemove.top()->getValue();
+            toRemove.pop();
+            if (*toRemove.top() == MULT) {
+                toRemove.pop();
+                val = val * toRemove.top()->getValue();
             } else {
-                aEnlever.pop();
-                val = val + aEnlever.top()->getValeur();
+                toRemove.pop();
+                val = val + toRemove.top()->getValue();
             }
         }
     }
 
-
-    stateStack.top()->transition(*this, new Expression(val));
-    lexer->putSymbol(symbol);
+    statesStack.top()->transition(*this, new SymbolExpr(val));
+    lexer->add(symbol);
 }
-
-void Automate::run() {
-    bool nextState = true;
-
-    while (nextState) {
-        Symbol *symbol = this->lexer->Consulter();
-        this->lexer->Avancer();
-        auto stateStackTop = this->stateStack.top();
-        cout << symbol->getValeur() << endl;
-        nextState = stateStackTop->transition(*this, symbol);
-    }
-
-    Symbol* symbolStackTop = this->symbolStack.top();
-
-    if(*symbolStackTop != ERREUR){
-        cout << "result: " << symbolStackTop->getValeur() << endl;
-    }else{
-        cout << "Invalid character" << endl;
-    }
-
-}
-
+ 

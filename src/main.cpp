@@ -1,13 +1,15 @@
-#include <iostream>
-#include "lexer.h"
 #include "Automate.h"
+#include "Lexer.h"
+#include <iostream>
 
+int main() {
 
-int main(void) {
-    string chaine("(1+3)*3");
+  string input;
 
-    (new Automate(chaine))->run();
+  cout << "Please type a sentence to analyze:" << endl;
+  cin >> input;
 
-    return 0;
+  (new Automate(input))->run();
+
+  return 0;
 }
-
