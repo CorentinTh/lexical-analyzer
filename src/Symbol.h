@@ -5,12 +5,12 @@ using namespace std;
 
 enum Identificateurs { OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR };
 
-const string Etiquettes[] = { "OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR" };
+const string Flags[] = { "OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR" };
 
-class Symbole {
+class Symbol {
    public:
-      Symbole(int i) : ident(i) {  }
-      virtual ~Symbole() { }
+    Symbol(int i) : ident(i) {  }
+      virtual ~Symbol() { }
       operator int() const { return ident; }
       virtual void Affiche();
 
@@ -18,9 +18,9 @@ class Symbole {
       int ident;
 };
 
-class Entier : public Symbole {
+class Entier : public Symbol {
    public:
-      Entier(int v) : Symbole(INT), valeur(v) { }
+      Entier(int v) : Symbol(INT), valeur(v) { }
       ~Entier() { }
       virtual void Affiche();
    protected:

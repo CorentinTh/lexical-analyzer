@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "symbole.h"
+#include "Symbol.h"
 using namespace std;
 
 class Lexer {
@@ -10,11 +10,11 @@ class Lexer {
       Lexer(string s) : flux(s), tete(0), tampon(nullptr) { }
       ~Lexer() { }
 
-      Symbole * Consulter();
+      Symbol * Consulter();
       void Avancer();
 
    protected:
       string flux;
       int tete;
-      Symbole * tampon;
+      Symbol * tampon;
 };
