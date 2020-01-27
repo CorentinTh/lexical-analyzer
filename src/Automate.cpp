@@ -47,24 +47,25 @@ void Automate::reduction(int n, Symbol *symbol) {
     }
 
 
-    stateStack.top()->transition(*this, symbol);
+    stateStack.top()->transition(*this, new Expression(val));
     lexer->putSymbol(symbol);
 }
 
 void Automate::run() {
-    bool nextState;
+    bool nextState = true;
 
-    do {
+    while (nextState) {
         Symbol *symbol = this->lexer->Consulter();
         this->lexer->Avancer();
         auto stateStackTop = this->stateStack.top();
+        cout << symbol->getValeur() << endl;
         nextState = stateStackTop->transition(*this, symbol);
-    } while (nextState);
+    }
 
     Symbol* symbolStackTop = this->symbolStack.top();
 
     if(*symbolStackTop != ERREUR){
-        symbolStackTop->Affiche();
+        cout << "result: " << symbolStackTop->getValeur() << endl;
     }else{
         cout << "Invalid character" << endl;
     }

@@ -4,7 +4,7 @@
 
 
 int main(void) {
-    string chaine("(1+34)*123");
+    string chaine("(1+3)*3");
 
     (new Automate(chaine))->run();
 

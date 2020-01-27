@@ -49,3 +49,14 @@ void Lexer::Avancer() {
    tampon = nullptr;
 }
 
+void Lexer::putSymbol(Symbol *s) {
+
+    switch (*s) {
+        case PLUS:
+        case MULT:
+        case OPENPAR:
+        case CLOSEPAR:
+            tampon = s;
+            break;
+    }
+}
