@@ -1,32 +1,37 @@
-//
-// Created by corentin on 27/01/2020.
-//
+/*
+ *             Lexical analyzer
+ *      Tania Oudinet & Corentin Thomasset
+ *          Language et grammaire
+ *         INSA Lyon - Janvier 2020
+ *
+ */
 
-#ifndef LEXICAL_ANALYZER_AUTOMATE_H
-#define LEXICAL_ANALYZER_AUTOMATE_H
+#pragma once
 
-#include "lexer.h"
+#include "Lexer.h"
 #include "Symbol.h"
 #include <stack>
-#include <iostream>
+#include <string>
 
 class State;
 
 using namespace std;
 
 class Automate {
+
 public:
     Automate(string &input);
+
     void shift(Symbol *symbol, State *state);
-    void reduction(int n, Symbol *symbol);
+
+    void reduce(int n, Symbol *symbol);
+
     void run();
 
 protected:
-
-    stack<Symbol *> symbolStack;
-    stack<State *> stateStack;
+    stack<Symbol *> symbolsStack;
+    stack<State *> statesStack;
     Lexer *lexer;
+    string input;
 };
 
-
-#endif //LEXICAL_ANALYZER_AUTOMATE_H

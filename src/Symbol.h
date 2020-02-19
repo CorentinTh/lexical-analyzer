@@ -1,103 +1,118 @@
+/*
+ *             Lexical analyzer
+ *      Tania Oudinet & Corentin Thomasset
+ *          Language et grammaire
+ *         INSA Lyon - Janvier 2020
+ *
+ */
+
 #pragma once
 
+#include <map>
 #include <string>
 
 using namespace std;
 
 enum Identificateurs {
-    OPENPAR, CLOSEPAR, PLUS, MULT, INT, FIN, ERREUR, EXPR
+    OPENPAR,
+    CLOSEPAR,
+    PLUS,
+    MULT,
+    INT,
+    END,
+    ERREUR,
+    EXPR
 };
 
-const string Flags[] = {"OPENPAR", "CLOSEPAR", "PLUS", "MULT", "INT", "FIN", "ERREUR"};
+const string Etiquettes[] = {
+        "OPENPAR",
+        "CLOSEPAR",
+        "PLUS",
+        "MULT",
+        "INT",
+        "END",
+        "ERREUR",
+        "EXPR"
+};
 
 class Symbol {
 public:
-    Symbol(int i) : ident(i) {}
-    virtual ~Symbol() {}
-    operator int() const { return ident; }
-    virtual void Affiche();
+    explicit Symbol(int i) : ident(i) {}
 
-    virtual int getValeur() const;
-    int getValeur();
+    virtual ~Symbol() = default;
+
+    operator int() const { return ident; }
+
+    virtual void print();
+
+    virtual int getValue();
 
 protected:
     int ident;
+};
+
+class SymbolOpenpar : public Symbol {
+public:
+    SymbolOpenpar() : Symbol(OPENPAR) {}
+
+    ~SymbolOpenpar() override = default;
 
 };
 
-class Openpar : public Symbol {
+class SymbolClosepar : public Symbol {
 public:
-    Openpar() : Symbol(OPENPAR) {}
-    ~Openpar() {}
-    virtual void Affiche();
+    SymbolClosepar() : Symbol(CLOSEPAR) {}
+
+    ~SymbolClosepar() override = default;
 
 };
 
-class Closepar : public Symbol {
+class SymbolPlus : public Symbol {
 public:
-    Closepar() : Symbol(CLOSEPAR) {}
-    ~Closepar() {}
-    virtual void Affiche();
+    SymbolPlus() : Symbol(PLUS) {}
+
+    ~SymbolPlus() override = default;
+
+};
+
+class SymbolMult : public Symbol {
+public:
+    SymbolMult() : Symbol(MULT) {}
+
+    ~SymbolMult() override = default;
+
+};
+
+class SymbolInt : public Symbol {
+public:
+    explicit SymbolInt(int v) : Symbol(INT), value(v) {}
+
+    ~SymbolInt() override = default;
+
+    void print() override;
+
+    int getValue() override;
 
 protected:
+    int value;
 };
 
-class Plus : public Symbol {
+class SymbolFin : public Symbol {
 public:
-    Plus() : Symbol(PLUS) {}
-    ~Plus() {}
-    virtual void Affiche();
+    SymbolFin() : Symbol(END) {}
 
-};
-
-class Mult : public Symbol {
-public:
-    Mult() : Symbol(MULT) {}
-    ~Mult() {}
-    virtual void Affiche();
+    ~SymbolFin() override = default;
 
 };
 
-class Entier : public Symbol {
+class SymbolExpr : public Symbol {
 public:
-    Entier(int v) : Symbol(INT), valeur(v) {}
-    ~Entier() {}
-    virtual void Affiche();
-    int eval() { return valeur; }
-    int getValeur() const;
-    int getValeur();
+    explicit SymbolExpr(int val) : Symbol(EXPR), value(val) {}
+
+    ~SymbolExpr() override = default;
+
+    int getValue() override;
 
 protected:
-    int valeur;
-
-};
-
-class Fin : public Symbol {
-public:
-    Fin() : Symbol(FIN) {}
-    ~Fin() {}
-    virtual void Affiche();
-
-protected:
-};
-
-class Erreur : public Symbol {
-public:
-    Erreur() : Symbol(ERREUR) {}
-    ~Erreur() {}
-    virtual void Affiche();
-
-protected:
-};
-
-class Expression : public Symbol {
-public:
-    Expression(int val) : Symbol(EXPR), valeur(val) {}
-    ~Expression() {}
-    virtual void Affiche();
-    int getValeur() const;
-
-protected:
-    int valeur;
-
+    int value;
 };

@@ -1,47 +1,25 @@
+/*
+ *             Lexical analyzer
+ *      Tania Oudinet & Corentin Thomasset
+ *          Language et grammaire
+ *         INSA Lyon - Janvier 2020
+ *
+ */
+
 #include "Symbol.h"
 #include <iostream>
 
-void Symbol::Affiche() {
-    cout << Flags[ident];
-}
+void Symbol::print() { cout << Etiquettes[ident]; }
 
-int Symbol::getValeur() const {
-    return -1;
-}
-
-void Entier::Affiche() {
-    Symbol::Affiche();
-    cout << "(" << valeur << ")";
-}
-
-int Entier::getValeur() const {
-    return valeur;
+void SymbolInt::print() {
+    Symbol::print();
+    cout << "(" << value << ")";
 }
 
 
-void Expression::Affiche() {
-    Symbol::Affiche();
-    cout << "(" << valeur << ")";
-}
 
-int Expression::getValeur() const {
-    return valeur;
-}
+int Symbol::getValue() { return -1; }
 
+int SymbolInt::getValue() { return value; }
 
-void Plus::Affiche() { Symbol::Affiche(); }
-
-void Mult::Affiche() { Symbol::Affiche(); }
-
-void Openpar::Affiche() { Symbol::Affiche(); }
-
-void Closepar::Affiche() { Symbol::Affiche(); }
-
-void Fin::Affiche() { Symbol::Affiche(); }
-
-void Erreur::Affiche() { Symbol::Affiche(); }
-
-int Symbol::getValeur() { return -1; }
-
-int Entier::getValeur() { return valeur; }
-
+int SymbolExpr::getValue() { return value; }
