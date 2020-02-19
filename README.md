@@ -12,4 +12,4 @@ make && ./executable
 
 ## Credit
 
-Application proudly made by [Tania Oudinet](https://github.com/SteamDragonLady) and [Corentin Thomasset](https://github.com/CorentinTh). 
+Application proudly made by [Tania Oudinet](https://github.com/SteamDragonLady) and [Corentin Thomasset](https://github.com/CorentinTh) for the INSA Lyon course "Grammaire et Language". 
